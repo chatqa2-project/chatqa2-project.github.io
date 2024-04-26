@@ -5,22 +5,18 @@
     <style type="text/css">
 
       /* css for table */
-      .tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
-      .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
+      .tg  {border:none;border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
+      .tg td{background-color:#EBF5FF;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#444;
         font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
-      .tg th{background-color:#888888;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
+      .tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#fff;
         font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-      .tg .tg-iw6l{border-color:inherit;font-family:"Trebuchet MS", Helvetica, sans-serif !important;text-align:left;vertical-align:center}
-      .tg .tg-2dy9{border-color:inherit;font-family:"Trebuchet MS", Helvetica, sans-serif !important;text-align:center;vertical-align:center}
-      
-      /* for average lines in table */
-      .tg .tg-buh4{background-color:#F0F0F0;font-family:"Trebuchet MS", Helvetica, sans-serif !important;text-align:left;vertical-align:center}
-      .tg .tg-dzk6{background-color:#F0F0F0;font-family:"Trebuchet MS", Helvetica, sans-serif !important;text-align:center;vertical-align:center}
-      
+      .tg .tg-baqh{text-align:center;vertical-align:center}
+      .tg .tg-0lax{text-align:left;vertical-align:center}
+
       /* css for text container */
       .container {
         margin: 0 auto; /* Center the container horizontally */
-        max-width: 800px; /* Set the maximum width of the container */
+        max-width: 950px; /* Set the maximum width of the container */
         text-align: left; /* Left-align the text within the container */
         padding: 0 20px; /* Optional: Add padding to the container */
         line-height: 1.5; /* Adjust line height for spacing between lines */
@@ -29,7 +25,7 @@
       
       /* color for subtitle */
       .colored_subtitle {
-        color: rgb(63, 63, 63); /* Set the color of the text */
+        color: rgb(100, 100, 100); /* Set the color of the text */
       }
 
       figure img {
@@ -48,7 +44,9 @@
     </p>
 
     <h2>ConvRAG Bench</h2>
-    We introduce ConvRAG Bench: a benchmark for retrieval/context-augmented conversational QA evaluation. ConvRAG Bench consisting of 10 datasets: <a href="https://arxiv.org/abs/2011.06623">Doc2Dial</a>, QuAC, QReCC, TopioCQA, INSCIT, CoQA, HybriDial, DoQA, SQA, ConvFinQA, which covers both long and short text-based documents, tabular reasoning and arithmatic calculations. <br>ConvRAG Bench also includes evaluations for unanswerable scenarios
+    We introduce ConvRAG Bench: a benchmark for retrieval/context-augmented conversational QA evaluation. ConvRAG Bench consisting of 10 datasets: <a href="https://arxiv.org/abs/2011.06623">Doc2Dial</a>, QuAC, QReCC, TopioCQA, INSCIT, CoQA, HybriDial, DoQA, SQA, ConvFinQA, which covers both long and short text-based documents, tabular reasoning and arithmatic calculations. 
+    <br>
+    ConvRAG Bench also includes evaluations for unanswerable scenarios (ConvRAG-unanswerable)
 
     <!-- tables for the ConvRAG Bench -->
     <h3 class="colored_subtitle">Main Results</h3>
@@ -56,10 +54,36 @@
       <img src="figs/Average_Scores_ConvRAG_Bench.png">
     </figure>
 
-    <h3 class="colored_subtitle">Unanswerable Case Evaluation</h3>
-    <figure>
+    <h3 class="colored_subtitle">ConvRAG-unanswerable</h3>
+    <!-- <figure>
       <img src="figs/Average_Scores_ConvRAG_Bench_unanswerable.png">
-    </figure>
+    </figure> -->
+    <table class="tg">
+      <thead>
+        <tr>
+          <th class="tg-0lax"></th>
+          <th class="tg-baqh">GPT-3.5-turbo-0613</th>
+          <th class="tg-baqh">Command-R-Plus</th>
+          <th class="tg-baqh">Llama-3-instruct-70b</th>
+          <th class="tg-baqh">GPT-4-0613</th>
+          <th class="tg-baqh">ChatQA-1.0-70B</th>
+          <th class="tg-baqh">ChatQA-1.5-8B</th>
+          <th class="tg-baqh">ChatQA-1.5-70B</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-0lax">Average&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td class="tg-baqh">73.27</td>
+          <td class="tg-baqh">68.11</td>
+          <td class="tg-baqh">76.42</td>
+          <td class="tg-baqh">80.73</td>
+          <td class="tg-baqh">77.25</td>
+          <td class="tg-baqh">75.57</td>
+          <td class="tg-baqh">71.86</td>
+        </tr>
+      </tbody>
+    </table>
 
     <h2>Training Datasets</h2>
     We release <a href="">training datasets</a> which include our conversational QA dataset and single-turn QA datasets.
