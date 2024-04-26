@@ -14,16 +14,24 @@
       .tg .tg-2dy9{border-color:inherit;font-family:"Trebuchet MS", Helvetica, sans-serif !important;text-align:center;vertical-align:top}
       
       /* css for text container */
-      .container {
+      .text_container {
         margin: 0 auto; /* Center the container horizontally */
         max-width: 700px; /* Set the maximum width of the container */
         text-align: left; /* Left-align the text within the container */
         padding: 0 20px; /* Optional: Add padding to the container */
         line-height: 1.5; /* Adjust line height for spacing between lines */
       }
+      .table_container{
+        margin: 0 auto; /* Center the container horizontally */
+        max-width: 1000px; /* Set the maximum width of the container */
+        text-align: left; /* Left-align the text within the container */
+        padding: 0 20px; /* Optional: Add padding to the container */
+        line-height: 1.5; /* Adjust line height for spacing between lines */
+      }
+      
     </style>
   </head>
-  <div class="container">
+  <div class="text_container">
 
     <h1>Introducing ChatQA-1.5: Outperforming GPT-4 at Conversational Question Answering</h1>
     <h3><a href="https://arxiv.org/abs/2401.10225">Link to Paper (arXiv)</a> &ensp; <a href="">Link to Models</a> &ensp; <a href="">Link to Data</a> </h3>
@@ -32,9 +40,12 @@
     </p>
 
     <h2>ConvRAG Bench</h2>
-    We introduce ConvRAG Bench: a benchmark for retrieval/context-augmented conversational QA evaluation. ConvRAG Bench consisting of 10 datasets: <a href="https://arxiv.org/abs/2011.06623">Doc2Dial</a>, QuAC, QReCC, TopioCQA, INSCIT, CoQA, HybriDial, DoQA, SQA, ConvFinQA, which covers both long and short text-based documents, tabular reasoning and arithmatic calculations.
+    We introduce ConvRAG Bench: a benchmark for retrieval/context-augmented conversational QA evaluation. ConvRAG Bench consisting of 10 datasets: <a href="https://arxiv.org/abs/2011.06623">Doc2Dial</a>, QuAC, QReCC, TopioCQA, INSCIT, CoQA, HybriDial, DoQA, SQA, ConvFinQA, which covers both long and short text-based documents, tabular reasoning and arithmatic calculations. <br>ConvRAG Bench also includes evaluations for unanswerable scenarios
 
     <!-- tables for the ConvRAG Bench -->
+    <h3>Main Results</h3>
+  </div>
+  <div class="table_container">
     <table class="tg">
       <thead>
         <tr>
@@ -130,7 +141,7 @@
           <td class="tg-2dy9">55.63</td>
         </tr>
         <tr>
-          <td class="tg-iw6l">HybriDial<span style="font-style:italic">*</span></td>
+          <td class="tg-iw6l">HybriDial*</td>
           <td class="tg-2dy9">54.51</td>
           <td class="tg-2dy9">46.70</td>
           <td class="tg-2dy9">48.59</td>
@@ -160,7 +171,7 @@
           <td class="tg-2dy9">58.25</td>
         </tr>
         <tr>
-          <td class="tg-iw6l">Average (exclude HybriDial)</td>
+          <td class="tg-iw6l">Average<br>(exclude HybriDial)</td>
           <td class="tg-2dy9">46.96</td>
           <td class="tg-2dy9">51.40</td>
           <td class="tg-2dy9">52.95</td>
@@ -171,9 +182,103 @@
         </tr>
       </tbody>
     </table>
+  </div>
 
-    ConvRAG Bench also includes evaluations for unanswerable scenarios
-    
+  <div class="text_container">
+    <h3>Unanswerable Case Evaluation</h3>
+  </div>
+
+  <div class="table_container">
+    <table class="tg">
+      <thead>
+        <tr>
+          <th class="tg-iw6l"></th>
+          <th class="tg-2dy9">GPT-3.5-turbo-0613</th>
+          <th class="tg-2dy9">Command-R-Plus</th>
+          <th class="tg-2dy9">Llama-3-instruct-70b</th>
+          <th class="tg-2dy9">GPT-4-0613</th>
+          <th class="tg-2dy9">ChatQA-1.0-70B</th>
+          <th class="tg-2dy9">ChatQA-1.5-8B</th>
+          <th class="tg-2dy9">ChatQA-1.5-70B</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-0lax"><span style="background-color:#FFF">Avg-Both</span></td>
+          <td class="tg-2dy9">73.2725</td>
+          <td class="tg-2dy9">68.1125</td>
+          <td class="tg-2dy9">76.42</td>
+          <td class="tg-2dy9">80.7325</td>
+          <td class="tg-2dy9">77.2475</td>
+          <td class="tg-2dy9">75.57</td>
+          <td class="tg-2dy9">71.8575</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">Avg-QuAC</td>
+          <td class="tg-2dy9">78.335</td>
+          <td class="tg-2dy9">69.605</td>
+          <td class="tg-2dy9">81.285</td>
+          <td class="tg-2dy9">87.415</td>
+          <td class="tg-2dy9">80.755</td>
+          <td class="tg-2dy9">79.3</td>
+          <td class="tg-2dy9">72.59</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">QuAC (no*)</td>
+          <td class="tg-2dy9">61.91</td>
+          <td class="tg-2dy9">41.79</td>
+          <td class="tg-2dy9">66.89</td>
+          <td class="tg-2dy9">83.45</td>
+          <td class="tg-2dy9">77.66</td>
+          <td class="tg-2dy9">63.39</td>
+          <td class="tg-2dy9">48.25</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">QuAC (yes*)</td>
+          <td class="tg-2dy9">94.76</td>
+          <td class="tg-2dy9">97.42</td>
+          <td class="tg-2dy9">95.68</td>
+          <td class="tg-2dy9">91.38</td>
+          <td class="tg-2dy9">83.85</td>
+          <td class="tg-2dy9">95.21</td>
+          <td class="tg-2dy9">96.93</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">Avg-DoQA</td>
+          <td class="tg-2dy9">68.21</td>
+          <td class="tg-2dy9">66.62</td>
+          <td class="tg-2dy9">71.555</td>
+          <td class="tg-2dy9">74.05</td>
+          <td class="tg-2dy9">73.74</td>
+          <td class="tg-2dy9">71.84</td>
+          <td class="tg-2dy9">71.125</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">DoQA (no*)</td>
+          <td class="tg-2dy9">51.99</td>
+          <td class="tg-2dy9">46.37</td>
+          <td class="tg-2dy9">60.78</td>
+          <td class="tg-2dy9">74.28</td>
+          <td class="tg-2dy9">68.81</td>
+          <td class="tg-2dy9">62.76</td>
+          <td class="tg-2dy9">52.24</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"><span style="background-color:#FFF">DoQA (yes*)</span></td>
+          <td class="tg-2dy9">84.43</td>
+          <td class="tg-2dy9">86.87</td>
+          <td class="tg-2dy9">82.33</td>
+          <td class="tg-2dy9">73.82</td>
+          <td class="tg-2dy9">78.67</td>
+          <td class="tg-2dy9">80.92</td>
+          <td class="tg-2dy9">90.01</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text_container">
+
     <h2>Training Datasets</h2>
     We release <a href="">training datasets</a> which include our conversational QA dataset and single-turn QA datasets.
 
