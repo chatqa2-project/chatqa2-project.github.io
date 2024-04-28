@@ -7,19 +7,19 @@
       /* css for table */
       .tg  {border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
       .tg td{background-color:#EBF5FF;border-color:#9ABAD9;border-style:solid;border-width:1px;color:#444;
-        font-family:Arial, sans-serif;font-size:13px;overflow:hidden;padding:10px 5px;word-break:normal;}
+        font-family:Arial, sans-serif;font-size:12px;overflow:hidden;padding:10px 5px;word-break:normal;}
       .tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:1px;color:#fff;
-        font-family:Arial, sans-serif;font-size:13px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        font-family:Arial, sans-serif;font-size:12px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
       .tg .tg-baqh{text-align:center;vertical-align:top}
 
       /* css for text container */
       .container {
         margin: 0 auto; /* Center the container horizontally */
-        max-width: 1150px; /* Set the maximum width of the container */
+        max-width: 900px; /* Set the maximum width of the container */
         text-align: left; /* Left-align the text within the container */
         padding: 0 20px; /* Optional: Add padding to the container */
         line-height: 1.5; /* Adjust line height for spacing between lines */
-        font-size: 22px; /* Set the font size for the container */
+        font-size: 18px; /* Set the font size for the container */
       }
       
       /* color for subtitle */
@@ -27,33 +27,57 @@
         color: rgb(91, 91, 91); /* Set the color of the text */
       }
 
-      figure img {
+      .custom-link {
+            color: #76b900; /* Sets the color to blue */
+            text-decoration: none; /* Removes underline */
+      }
+
+      .img-convrag {
         max-width: 90%; /* Set the maximum width of the image to 100% */
         height: auto; /* Ensure the aspect ratio of the image is maintained */
+      }
+
+      .img-humaneval {
+        max-width: 70%; /* Set the maximum width of the image to 100% */
+        height: auto; /* Ensure the aspect ratio of the image is maintained */
+      }
+
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      code {
+        display: block;
       }
       
     </style>
   </head>
   <div class="container">
 
-    <h1>Introducing ChatQA-1.5: Outperforming GPT-4 at RAG-based Conversational Question Answering</h1>
-    <h3><a href="https://arxiv.org/abs/2401.10225">Link to Paper (arXiv)</a> &ensp; <a href="">Link to Models</a> &ensp; <a href="">Link to Data</a> </h3>
+    <h2>Introducing ChatQA-1.5: Outperforming GPT-4 at RAG-based Conversational Question Answering</h2>
+    <h4><a href="https://arxiv.org/abs/2401.10225" class="custom-link">Link to Paper</a> &ensp; <a href=""  class="custom-link">Link to Models</a> &ensp; <a href="" class="custom-link">Link to Data</a> </h4>
     <p>
-    Today, we release ChatQA-1.5-8b and ChatQA-1.5-70b models, which excels at RAG-based conversational question answering (QA). ChatQA-1.5 is built using the recipe from <a href="https://arxiv.org/abs/2401.10225">ChatQA (1.0)</a> on top of Llama-3 foundation model. Additionally, we incorporate more conversational QA data to enhance its tabular and arithmatic calculation capability.
+    Today, we release ChatQA-1.5-8B and ChatQA-1.5-70B models, which excels at RAG-based conversational question answering (QA). ChatQA-1.5 is built using the recipe from <a href="https://arxiv.org/abs/2401.10225" class="custom-link">ChatQA (1.0)</a>, and it is built on top of Llama-3 foundation model. Additionally, we incorporate more conversational QA data to enhance its tabular and arithmatic calculation capability.
     </p>
 
-    <h2>ConvRAG Bench</h2>
-    We introduce ConvRAG Bench: a benchmark for retrieval/context-augmented conversational QA evaluation. ConvRAG Bench consisting of 10 datasets: <a href="https://arxiv.org/abs/2011.06623">Doc2Dial</a>, QuAC, QReCC, TopioCQA, INSCIT, CoQA, HybriDial, DoQA, SQA, ConvFinQA, which covers both long and short text-based documents, tabular reasoning and arithmatic calculations. 
-    <br>
-    ConvRAG Bench also includes evaluations for the unanswerable scenario, where we evaluate models' capability to tell whether questions are answerable based on the given context.
+    <h3>ConvRAG Bench</h3>
+    We introduce ConvRAG Bench: a benchmark for evaluating a model's conversational QA capability over documents or retrieved context. 
+    ConvRAG Bench consisting of 10 datasets: <a href="https://arxiv.org/abs/2011.06623" class="custom-link">Doc2Dial</a>, <a href="https://arxiv.org/abs/1808.07036" class="custom-link">QuAC</a>, <a href="https://arxiv.org/abs/2010.04898" class="custom-link">QReCC</a>, <a href="https://arxiv.org/abs/2110.00768" class="custom-link">TopioCQA</a>, <a href="https://arxiv.org/abs/2207.00746" class="custom-link">INSCIT</a>, <a href="https://arxiv.org/abs/1808.07042" class="custom-link">CoQA</a>, <a href="https://arxiv.org/abs/2204.13243" class="custom-link">HybriDialogue</a>, <a href="https://arxiv.org/abs/2005.01328" class="custom-link">DoQA</a>, <a href="https://aclanthology.org/P17-1167/" class="custom-link">SQA</a>, <a href="https://arxiv.org/abs/2210.03849" class="custom-link">ConvFinQA</a>. 
+    ConvRAG Bench covers a wide range of documents and question types, which require models to generate responses from long context, comprehend and reason over tables, and conduct arithmetic calculations.
+    
+    <br><br>
+    ConvRAG Bench also includes evaluations for the unanswerable scenario, where we evaluate models' capability to determine whether the answer to the question can be found within the given context. Equipping models with such capability can substantially decrease the likelihood of hallucination.
 
     <!-- tables for the ConvRAG Bench -->
-    <h3 class="colored_subtitle">Main Results</h3>
+    <h4 class="colored_subtitle">Superior Conversational QA Capability over (Retrieved) Context</h4>
     <figure>
-      <img src="figs/Average_Scores_ConvRAG_Bench.png">
+      <img class="img-convrag" src="figs/Average_Scores_ConvRAG_Bench.png">
     </figure>
+    We use the same (retrieved) context as inputs for all the models for the fair comparison. ChatQA-1.0-70B and ChatQA-1.5-8B achieve comparable scores to GPT-4-0613, and ChatQA-1.5-70B achieves better scores than GPT-4-0613.
 
-    <h3 class="colored_subtitle">Unanswerable Scenario Evaluation</h3>
+    <h4 class="colored_subtitle">Unanswerable Scenario Evaluation</h4>
     
     <table class="tg">
       <thead>
@@ -81,9 +105,11 @@
         </tr>
       </tbody>
     </table>
+    <br>
+    We use QuAC and DoQA datasets which have such unanswerable cases to evaluate such capability. We use both answerable and unanswerable samples for this evaluation. Specifically, for unanswerable case, we consider the model indicating that the question cannot be answered as correct, and as for answerable cases, we consider the model not indicating the question is unanswerable as correct (i.e., the model giving an answer). In the end, we calculate the average accuracy score of unanswerable and answerable cases as the final metric.
 
-  <h2>Other Evaluations</h2>
-    <h3 class="colored_subtitle">KILT</h3>
+  <h3>Other Evaluations</h3>
+    <h4 class="colored_subtitle">KILT</h4>
     <table class="tg">
       <thead>
         <tr>
@@ -98,23 +124,35 @@
           <td class="tg-baqh">&nbsp;&nbsp;Average&nbsp;&nbsp;</td>
           <td class="tg-baqh">71.5</td>
           <td class="tg-baqh">67.57</td>
-          <td class="tg-baqh">69.75</td>
+          <td class="tg-baqh">69.86</td>
         </tr>
       </tbody>
     </table>
+    <br>
+    The socres are average accuracy over Natural Questions, TriviaQA, and HotpotQA in <a href="https://arxiv.org/abs/2009.02252" class="custom-link">KILT</a> benchmark. We use the same accuracy evaluation metric as in <a href="https://cohere.com/blog/command-r" class="custom-link">Command-R-Plus</a>, where the accuracy is calculated using the presence of keyphrases in the model's answer. We use <a href="https://arxiv.org/abs/2302.07452" class="custom-link">Dragon</a> to retrieve relevant contexts.
+    
+    <h4 class="colored_subtitle">Human Evaluations</h4>
+    <figure>
+      <img class="img-humaneval" src="figs/human_eval.png">
+    </figure>
+    
+    In this human evaluation, we randomly select 60 samples for each dataset in ConvRAG, and each sample is labelled by three annotators, which results in a total of 1800 annotations. We ask annotators to verify the facts in models' outputs and determine which model provides a more accurate response to the question. From the results, ChatQA-1.0-70B and GPT-4 are tie most of the time, and GPT-4 achieves slightly higher win rate.
 
-    <h3 class="colored_subtitle">Human Evaluations</h3>
+  <h3>Training Datasets</h3>
+    We release all <a href="" class="custom-link">training datasets</a> described in <a href="https://arxiv.org/abs/2401.10225" class="custom-link">ChatQA (1.0)</a>.
 
-    <h2>Training Datasets</h2>
-    We release <a href="">training datasets</a> which include our conversational QA dataset and single-turn QA datasets.
+  <h3>Conversational QA Retriever</h3>
+    We release the <a href="" class="custom-link">conversational QA retriever</a> described in <a href="https://arxiv.org/abs/2401.10225" class="custom-link">ChatQA (1.0)</a>.
 
-    <h2>Conversational QA Retriever</h2>
-    We release conversational QA retriever
-
-    <h2>License</h2>
-
-    <h2>Citation</h2>
-
+  <!-- <h3>License</h3>
+    The use of the ChatQA-1.5-8B and ChatQA-1.5-70B are governed by the <a href="https://llama.meta.com/llama3/license/" class="custom-link">META LLAMA 3 COMMUNITY LICENSE AGREEMENT</a>. -->
+    
+  <h3>Citation</h3>
+  <pre><code>@article{liu2024chatqa,
+  title={ChatQA: Building GPT-4 Level Conversational QA Models},
+  author={Liu, Zihan and Ping, Wei and Roy, Rajarshi and Xu, Peng and Lee, Chankyu and Shoeybi, Mohammad and Catanzaro, Bryan},
+  journal={arXiv preprint arXiv:2401.10225},
+  year={2024}}</code></pre>
 
   </div>
   
