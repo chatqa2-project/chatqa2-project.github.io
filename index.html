@@ -33,7 +33,7 @@
       }
 
       .img-convrag {
-        max-width: 90%; /* Set the maximum width of the image to 100% */
+        max-width: 96%; /* Set the maximum width of the image to 100% */
         height: auto; /* Ensure the aspect ratio of the image is maintained */
       }
 
@@ -61,7 +61,7 @@
     <h2>Introducing Llama3-ChatQA-1.5: Surpassing GPT-4 on Conversational QA and RAG</h2>
     <h4> <a href="https://huggingface.co/nvidia/Llama3-ChatQA-1.5-70B" class="custom-link">Model</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/ConvRAG-Bench" class="custom-link">Evaluation Data</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/ChatQA-Training-Data" class="custom-link">Training Data</a> &ensp; <a href="https://huggingface.co/nvidia/dragon-multiturn-query-encoder" class="custom-link">Retriever</a> &ensp; <a href="https://arxiv.org/abs/2401.10225" class="custom-link">Paper</a>  </h4>
     <p>
-    Today, we release Llama3-ChatQA-1.5, which excels at conversational question answering (QA) and retrieval-augmented generation (RAG). The Llama3-ChatQA-1.5-8B and Llama3-ChatQA-1.5-8B use an improved training recipe from <a href="https://arxiv.org/abs/2401.10225" class="custom-link">ChatQA-1.0</a>, and are built on the top of Llama3-8B and Llama3-70B base models. Specifically, we incorporate more conversational QA data to enhance its tabular and arithmatic calculation capability.
+    Today, we release Llama3-ChatQA-1.5, which excels at conversational question answering (QA) and retrieval-augmented generation (RAG). The Llama3-ChatQA-1.5-8B and Llama3-ChatQA-1.5-70B use an improved training recipe from <a href="https://arxiv.org/abs/2401.10225" class="custom-link">ChatQA-1.0</a>, and are built on the top of Llama3-8B and Llama3-70B base models. Specifically, we incorporate more conversational QA data to enhance its tabular and arithmatic calculation capability.
     We share the model weights, evaluation data, training data, and SFT recipe for future study.
     </p>
 
@@ -84,13 +84,13 @@
       <thead>
         <tr>
           <th class="tg-baqh"></th>
-          <th class="tg-baqh">&nbsp;&nbsp;GPT-3.5-turbo-0613&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;Command-R-Plus&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;Llama-3-instruct-70b&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;GPT-4-0613&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;ChatQA-1.0-70B&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;ChatQA-1.5-8B&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;ChatQA-1.5-70B&nbsp;&nbsp;</th>
+          <th class="tg-baqh">GPT-3.5-turbo-0613</th>
+          <th class="tg-baqh">Command-R-Plus</th>
+          <th class="tg-baqh">Llama-3-instruct-70b</th>
+          <th class="tg-baqh">GPT-4-0613</th>
+          <th class="tg-baqh">ChatQA-1.0-70B</th>
+          <th class="tg-baqh">Llama3-ChatQA-1.5-8B</th>
+          <th class="tg-baqh">Llama3-ChatQA-1.5-70B</th>
         </tr>
       </thead>
       <tbody>
@@ -118,7 +118,7 @@
           <th class="tg-baqh"></th>
           <th class="tg-baqh">&nbsp;&nbsp;&nbsp;Command-R-Plus&nbsp;&nbsp;&nbsp;</th>
           <th class="tg-baqh">&nbsp;&nbsp;&nbsp;Llama3-instruct-70b&nbsp;&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;&nbsp;ChatQA-1.5-70B&nbsp;&nbsp;&nbsp;</th>
+          <th class="tg-baqh">&nbsp;&nbsp;&nbsp;Llama3-ChatQA-1.5-70B&nbsp;&nbsp;&nbsp;</th>
         </tr>
       </thead>
       <tbody>
