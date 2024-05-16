@@ -33,7 +33,7 @@
       }
 
       .img-chatrag {
-        max-width: 90%; /* Set the maximum width of the image to 100% */
+        max-width: 92%; /* Set the maximum width of the image to 100% */
         height: auto; /* Ensure the aspect ratio of the image is maintained */
       }
 
@@ -72,9 +72,9 @@
     <!-- tables for the ChatRAG Bench -->
     <h4 class="colored_subtitle">Superior Accuracy on RAG and Conversational QA</h4>
     <figure>
-      <img class="img-chatrag" src="figs/Average_Scores_ChatRAG_Bench.png">
+      <img class="img-chatrag" src="figs/Average_Scores_ChatRAG_Bench_exclude_HybriDial.png">
     </figure>
-    We use the same (retrieved) context as inputs for all the LLMs for a fair comparison. Both Llama3-ChatQA-1.5-8B and Llama3-ChatQA-1.5-70B achieve better average scores (e.g, unigram F1) than GPT-4-0613 and Command-R-Plus (100B).
+    We use the same (retrieved) context as inputs for all the LLMs for a fair comparison. ChatQA-1.5 models use training samples from the HybriDial dataset. Hence, we also compare average scores excluding HybriDial for the fair comparison. Compared to GPT-4-0613 and GPT-4-Turbo, Llama3-ChatQA-1.5-8B achieves comparable results, and Llama3-ChatQA-1.5-70B greatly outperforms both of them.
     
     <h4 class="colored_subtitle">Evaluation of Unanswerable Scenario</h4>
     ChatRAG Bench also includes evaluations for the unanswerable scenario, where we evaluate models' capability to determine whether the answer to the question can be found within the given context. Equipping models with such capability can substantially decrease the likelihood of hallucination.
@@ -83,10 +83,10 @@
       <thead>
         <tr>
           <th class="tg-baqh"></th>
-          <th class="tg-baqh">&nbsp;&nbsp;GPT-3.5-turbo-0613&nbsp;&nbsp;</th>
           <th class="tg-baqh">&nbsp;&nbsp;Command-R-Plus&nbsp;&nbsp;</th>
           <th class="tg-baqh">&nbsp;&nbsp;Llama-3-instruct-70b&nbsp;&nbsp;</th>
           <th class="tg-baqh">&nbsp;&nbsp;GPT-4-0613&nbsp;&nbsp;</th>
+          <th class="tg-baqh">&nbsp;&nbsp;GPT-4-Turbo&nbsp;&nbsp;</th>
           <th class="tg-baqh">&nbsp;&nbsp;ChatQA-1.0-70B&nbsp;&nbsp;</th>
           <th class="tg-baqh">&nbsp;&nbsp;ChatQA-1.5-8B&nbsp;&nbsp;</th>
           <th class="tg-baqh">&nbsp;&nbsp;ChatQA-1.5-70B&nbsp;&nbsp;</th>
@@ -95,10 +95,10 @@
       <tbody>
         <tr>
           <td class="tg-baqh">&nbsp;&nbsp;Average&nbsp;&nbsp;</td>
-          <td class="tg-baqh">73.27</td>
           <td class="tg-baqh">68.11</td>
           <td class="tg-baqh">76.42</td>
           <td class="tg-baqh">80.73</td>
+          <td class="tg-baqh">80.47</td>
           <td class="tg-baqh">77.25</td>
           <td class="tg-baqh">75.57</td>
           <td class="tg-baqh">71.86</td>
