@@ -74,7 +74,7 @@
     <figure>
       <img class="img-chatrag" src="figs/Average_Scores_ChatRAG_Bench_exclude_HybriDial.png">
     </figure>
-    We use the same (retrieved) context as inputs for all the LLMs for a fair comparison. ChatQA-1.5 models use training samples from the HybriDial dataset. Hence, we also compare average scores excluding HybriDial for the fair comparison. Compared to GPT-4-0613 and GPT-4-Turbo, Llama3-ChatQA-1.5-8B achieves comparable results, and Llama3-ChatQA-1.5-70B greatly outperforms both of them.
+    We use the same (retrieved) context as inputs for all the LLMs for a fair comparison. ChatQA-1.5 models use training samples from the HybriDial dataset. Hence, we compare average scores (e.g., Unigram F1) excluding HybriDial for the fair comparison. Compared to GPT-4-0613 and GPT-4-Turbo-2024-04-09, Llama3-ChatQA-1.5-8B achieves comparable results, and Llama3-ChatQA-1.5-70B greatly outperforms both of them.
     
     <h4 class="colored_subtitle">Evaluation of Unanswerable Scenario</h4>
     ChatRAG Bench also includes evaluations for the unanswerable scenario, where we evaluate models' capability to determine whether the answer to the question can be found within the given context. Equipping models with such capability can substantially decrease the likelihood of hallucination.
