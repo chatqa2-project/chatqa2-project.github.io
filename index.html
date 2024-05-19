@@ -10,7 +10,19 @@
         font-family:Arial, sans-serif;font-size:12px;overflow:hidden;padding:10px 5px;word-break:normal;}
       .tg th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:1px;color:#fff;
         font-family:Arial, sans-serif;font-size:12px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-      .tg .tg-baqh{text-align:center;vertical-align:top}
+      .tg .tg-center{text-align:center;vertical-align:top}
+      .tg .tg-left{text-align:left;vertical-align:top}
+
+      /* css for table */
+      .tt  {border-collapse:collapse;border-color:#9ABAD9;border-spacing:0;}
+      .tt td{background-color:#EBF5FF;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#444;
+        font-family:Arial, sans-serif;font-size:13px;overflow:hidden;padding:10px 5px;word-break:normal;}
+      .tt th{background-color:#409cff;border-color:#9ABAD9;border-style:solid;border-width:0px;color:#fff;
+        font-family:Arial, sans-serif;font-size:13px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+      .tt .tt-center{text-align:center;vertical-align:top}
+      .tt .tt-left{text-align:left;vertical-align:top}
+      .tt .tt-center_boardertop{text-align:center;vertical-align:top;border-top-width:1.6px}
+      .tt .tt-left_boardertop{text-align:left;vertical-align:top;border-top-width:1.6px}
 
       /* css for text container */
       .container {
@@ -82,26 +94,26 @@
     <table class="tg">
       <thead>
         <tr>
-          <th class="tg-baqh"></th>
-          <th class="tg-baqh">&nbsp;&nbsp;Command-R-Plus&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;Llama-3-instruct-70b&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;GPT-4-0613&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;GPT-4-Turbo&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;ChatQA-1.0-70B&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;ChatQA-1.5-8B&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;ChatQA-1.5-70B&nbsp;&nbsp;</th>
+          <th class="tg-left"></th>
+          <th class="tg-center">&nbsp;&nbsp;Command-R-Plus&nbsp;&nbsp;</th>
+          <th class="tg-center">&nbsp;&nbsp;Llama-3-instruct-70b&nbsp;&nbsp;</th>
+          <th class="tg-center">&nbsp;&nbsp;GPT-4-0613&nbsp;&nbsp;</th>
+          <th class="tg-center">&nbsp;&nbsp;GPT-4-Turbo&nbsp;&nbsp;</th>
+          <th class="tg-center">&nbsp;&nbsp;ChatQA-1.0-70B&nbsp;&nbsp;</th>
+          <th class="tg-center">&nbsp;&nbsp;ChatQA-1.5-8B&nbsp;&nbsp;</th>
+          <th class="tg-center">&nbsp;&nbsp;ChatQA-1.5-70B&nbsp;&nbsp;</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="tg-baqh">&nbsp;&nbsp;Average&nbsp;&nbsp;</td>
-          <td class="tg-baqh">68.11</td>
-          <td class="tg-baqh">76.42</td>
-          <td class="tg-baqh">80.73</td>
-          <td class="tg-baqh">80.47</td>
-          <td class="tg-baqh">77.25</td>
-          <td class="tg-baqh">75.57</td>
-          <td class="tg-baqh">71.86</td>
+          <td class="tg-left">&nbsp;&nbsp;Average&nbsp;&nbsp;</td>
+          <td class="tg-center">68.11</td>
+          <td class="tg-center">76.42</td>
+          <td class="tg-center">80.73</td>
+          <td class="tg-center">80.47</td>
+          <td class="tg-center">77.25</td>
+          <td class="tg-center">75.57</td>
+          <td class="tg-center">71.86</td>
         </tr>
       </tbody>
     </table>
@@ -110,30 +122,104 @@
     We use QuAC and DoQA datasets which have such unanswerable cases to evaluate such capability. We use both answerable and unanswerable samples for this evaluation. Specifically, for unanswerable case, we consider the model indicating that the question cannot be answered as correct, and as for answerable cases, we consider the model not indicating the question is unanswerable as correct (i.e., the model giving an answer). In the end, we calculate the average accuracy score of unanswerable and answerable cases as the final metric.
 
   <h3>Other Evaluations</h3>
-    <h4 class="colored_subtitle">KILT</h4>
+    <!-- <h4 class="colored_subtitle">KILT</h4>
     <table class="tg">
       <thead>
         <tr>
-          <th class="tg-baqh"></th>
-          <th class="tg-baqh">&nbsp;&nbsp;&nbsp;GPT-3.5-Turbo&nbsp;&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;&nbsp;Llama3-instruct-70b&nbsp;&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;&nbsp;Command-R&nbsp;&nbsp;&nbsp;</th>
-          <th class="tg-baqh">&nbsp;&nbsp;&nbsp;ChatQA-1.5-70B&nbsp;&nbsp;&nbsp;</th>
+          <th class="tg-center"></th>
+          <th class="tg-center">&nbsp;&nbsp;&nbsp;GPT-3.5-Turbo&nbsp;&nbsp;&nbsp;</th>
+          <th class="tg-center">&nbsp;&nbsp;&nbsp;Llama3-instruct-70b&nbsp;&nbsp;&nbsp;</th>
+          <th class="tg-center">&nbsp;&nbsp;&nbsp;Command-R&nbsp;&nbsp;&nbsp;</th>
+          <th class="tg-center">&nbsp;&nbsp;&nbsp;ChatQA-1.5-70B&nbsp;&nbsp;&nbsp;</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="tg-baqh">&nbsp;&nbsp;Average&nbsp;&nbsp;</td>
-          <td class="tg-baqh">63.70</td>
-          <td class="tg-baqh">67.57</td>
-          <td class="tg-baqh">71.50</td>
-          <td class="tg-baqh">70.07</td>
+          <td class="tg-center">&nbsp;&nbsp;Average&nbsp;&nbsp;</td>
+          <td class="tg-center">63.70</td>
+          <td class="tg-center">67.57</td>
+          <td class="tg-center">71.50</td>
+          <td class="tg-center">70.07</td>
         </tr>
       </tbody>
     </table>
     <br>
     The socres are average accuracy over Natural Questions, TriviaQA, and HotpotQA in <a href="https://arxiv.org/abs/2009.02252" class="custom-link">KILT</a> benchmark. We use the same accuracy evaluation metric as in <a href="https://cohere.com/blog/command-r" class="custom-link">Command-R</a>, where the accuracy is calculated using the presence of keyphrases in the model's answer. We use <a href="https://arxiv.org/abs/2302.07452" class="custom-link">Dragon retriever</a> to retrieve relevant contexts.
-    
+     -->
+     <h4 class="colored_subtitle">Evaluation on Single-Turn QA and RAG Benchmark</h4>
+     <table class="tt">
+      <caption>Zero-shot exact match scores on Natural Questions (NQ), TriviaQA, and HotpotQA.</caption>
+      <thead>
+        <tr>
+          <th class="tt-left">Models</th>
+          <th class="tt-center">&nbsp;&nbsp;&nbsp;Average&nbsp;&nbsp;&nbsp;</th>
+          <th class="tt-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NQ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+          <th class="tt-center">&nbsp;&nbsp;&nbsp;TriviaQA&nbsp;&nbsp;&nbsp;</th>
+          <th class="tt-center">&nbsp;&nbsp;&nbsp;HotpotQA&nbsp;&nbsp;&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tt-left">Atlas (11B) <a href="https://www.jmlr.org/papers/volume24/23-0037/23-0037.pdf" class="custom-link">(Izacard et al., 2023)</a></td>
+          <td class="tt-center">39.4</td>
+          <td class="tt-center">26.7</td>
+          <td class="tt-center">56.9</td>
+          <td class="tt-center">34.7</td>
+        </tr>
+        <tr>
+          <td class="tt-left">Raven (11B) <a href="https://arxiv.org/abs/2308.07922" class="custom-link">(Huang et al., 2023)</a></td>
+          <td class="tt-center">-</td>
+          <td class="tt-center">29.6</td>
+          <td class="tt-center">65.7</td>
+          <td class="tt-center">-</td>
+        </tr>
+        <tr>
+          <td class="tt-left">RECOMP (20B) <a href="https://arxiv.org/abs/2310.04408" class="custom-link">(Xu et al., 2024)</a></td>
+          <td class="tt-center">42.1</td>
+          <td class="tt-center">37.0</td>
+          <td class="tt-center">59.0</td>
+          <td class="tt-center">30.4</td>
+        </tr>
+        <tr>
+          <td class="tt-left">InstructRetro (43B) <a href="https://arxiv.org/abs/2310.07713" class="custom-link">(Wang et al., 2024)</a></td>
+          <td class="tt-center">-</td>
+          <td class="tt-center">38.9</td>
+          <td class="tt-center">65.6</td>
+          <td class="tt-center">-</td>
+        </tr>
+        <tr>
+          <td class="tt-left">RePlug (65B) <a href="https://arxiv.org/abs/2301.12652" class="custom-link">(Shi et al., 2023)</a></td>
+          <td class="tt-center">44.5</td>
+          <td class="tt-center">28.8</td>
+          <td class="tt-center">72.6</td>
+          <td class="tt-center">32.0</td>
+        </tr>
+        <tr>
+          <td class="tt-left">RA-DIT (65B) <a href="https://arxiv.org/abs/2310.01352" class="custom-link">(Lin et al., 2024)</a></td>
+          <td class="tt-center">50.1</td>
+          <td class="tt-center">35.2</td>
+          <td class="tt-center">75.4</td>
+          <td class="tt-center">39.7</td>
+        </tr>
+        <tr>
+          <td class="tt-left_boardertop">Llama3-ChatQA-1.5-8B</td>
+          <td class="tt-center_boardertop">52.3</td>
+          <td class="tt-center_boardertop">42.4</td>
+          <td class="tt-center_boardertop">81.0</td>
+          <td class="tt-center_boardertop">33.5</td>
+        </tr>
+        <tr>
+          <td class="tt-left">Llama3-ChatQA-1.5-70B</td>
+          <td class="tt-center">58.7</td>
+          <td class="tt-center">47.0</td>
+          <td class="tt-center">85.6</td>
+          <td class="tt-center">42.2</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    We further evaluate Llama3-ChatQA-1.5 models on knowledge-intensive single-turn QA datasets: Natural Questions (NQ), TriviaQA, and HotpotQA from KILT Benchmark, and compare them against frontier RAG models. We find that both ChatQA-1.5-8B and ChatQA-1.5-70B outperform existing frontier RAG models on this benchmark.
+
     <h4 class="colored_subtitle">Human Evaluations</h4>
     <figure>
       <img class="img-humaneval" src="figs/human_eval.png">
