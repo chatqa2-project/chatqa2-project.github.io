@@ -1,1 +1,1 @@
-# chatqa-project.github.io
+# chatqa2-project.github.io
