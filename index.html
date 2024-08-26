@@ -49,6 +49,11 @@
         height: auto; /* Ensure the aspect ratio of the image is maintained */
       }
 
+      .img-full {
+        max-width: 100%; /* Set the maximum width of the image to 100% */
+        height: auto; /* Ensure the aspect ratio of the image is maintained */
+      }
+
       .img-humaneval {
         max-width: 55%; /* Set the maximum width of the image to 100% */
         height: auto; /* Ensure the aspect ratio of the image is maintained */
@@ -68,184 +73,79 @@
     </style>
   </head>
 
+
   <div class="container">
     <br>
     <h2>Introducing ChatQA-2: Bridging the Gap to Proprietary LLMs in Long Context and RAG Capabilities</h2>
     <h4> <a href="https://huggingface.co/nvidia/" class="custom-link">Model Weights🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Evaluation Data🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Training Data🤗</a> &ensp; <a href="https://huggingface.co/nvidia/dragon-multiturn-query-encoder" class="custom-link">Retriever🤗</a> &ensp; <a href="https://arxiv.org/pdf/2401.10225" class="custom-link">Paper</a>  </h4>
     <p>
-    Today (August ???, 2024), we release ChatQA-2, which achieves accuracy comparable to GPT-4-Turbo-2024-04-09 on many long-context understanding tasks and surpasses it on the RAG benchmark <a href="https://arxiv.org/abs/2407.14482" class="custom-link">ChatQA2 paper</a>, and it is built on the top of the <a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B" class="custom-link">Llama-3 base model</a>. Specifically, we incorporate more long context pretraining data as well as long SFT data. We share the model weights, evaluation data, training data, and SFT recipe for future study.
+    Today (August ?th, 2024), we release ChatQA-2, which achieves better accuracy than GPT-4-Turbo-2024-04-09 on many long-context understanding tasks and surpasses it on the RAG benchmark <a href="https://arxiv.org/abs/2407.14482" class="custom-link">ChatQA-2 paper</a>, and it is built on the top of the <a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B" class="custom-link">Llama-3 base model</a>. Specifically, we incorporate more long context pretraining data as well as long SFT data. We share the model weights, evaluation data, training data, and SFT recipe for future study.
     </p>
-
-    <h3>ChatRAG Bench</h3>
-    We release <a href="https://huggingface.co/datasets/nvidia/ChatRAG-Bench" class="custom-link">ChatRAG Bench</a>: a benchmark for evaluating a model's conversational QA capability over documents or retrieved context. 
-    ChatRAG Bench consisting of 10 datasets: <a href="https://arxiv.org/abs/2011.06623" class="custom-link">Doc2Dial</a>, <a href="https://arxiv.org/abs/1808.07036" class="custom-link">QuAC</a>, <a href="https://arxiv.org/abs/2010.04898" class="custom-link">QReCC</a>, <a href="https://arxiv.org/abs/2110.00768" class="custom-link">TopioCQA</a>, <a href="https://arxiv.org/abs/2207.00746" class="custom-link">INSCIT</a>, <a href="https://arxiv.org/abs/1808.07042" class="custom-link">CoQA</a>, <a href="https://arxiv.org/abs/2204.13243" class="custom-link">HybriDialogue</a>, <a href="https://arxiv.org/abs/2005.01328" class="custom-link">DoQA</a>, <a href="https://aclanthology.org/P17-1167/" class="custom-link">SQA</a>, <a href="https://arxiv.org/abs/2210.03849" class="custom-link">ConvFinQA</a>. 
-    ChatRAG Bench covers a wide range of documents and question types, which require models to generate responses from long context, comprehend and reason over tables, conduct arithmetic calculations, and indicate when questions cannot be found within the context.
-
-    <!-- tables for the ChatRAG Bench -->
-    <h4 class="colored_subtitle">Superior Accuracy on RAG and Conversational QA</h4>
-    <figure>
-      <img class="img-chatrag" src="figs/Average_Scores_ChatRAG_Bench_exclude_HybriDial.png">
-    </figure>
-    We use <strong>the same (retrieved) context as inputs for all the LLMs</strong> for a fair comparison. ChatQA-1.5 models use training samples from the HybriDial dataset. Hence, we compare average scores (e.g., Unigram F1) excluding HybriDial for the fair comparison. Compared to GPT-4-0613 and GPT-4-Turbo-2024-04-09, Llama3-ChatQA-1.5-8B achieves comparable results, and Llama3-ChatQA-1.5-70B greatly outperforms both of them.
     
-    <h4 class="colored_subtitle">Evaluation of Unanswerable Scenario</h4>
-    ChatRAG Bench also includes evaluations for the unanswerable scenario, where we evaluate models' capability to determine whether the answer to the question can be found within the given context. Equipping models with such capability can substantially decrease the likelihood of hallucination.
-
-    <table class="tg">
-      <thead>
-        <tr>
-          <th class="tg-left"></th>
-          <th class="tg-center">&nbsp;&nbsp;Command-R-Plus&nbsp;&nbsp;</th>
-          <th class="tg-center">&nbsp;&nbsp;Llama-3-instruct-70b&nbsp;&nbsp;</th>
-          <th class="tg-center">&nbsp;&nbsp;GPT-4-0613&nbsp;&nbsp;</th>
-          <th class="tg-center">&nbsp;&nbsp;GPT-4-Turbo&nbsp;&nbsp;</th>
-          <th class="tg-center">&nbsp;&nbsp;ChatQA-1.0-70B&nbsp;&nbsp;</th>
-          <th class="tg-center">&nbsp;&nbsp;ChatQA-1.5-8B&nbsp;&nbsp;</th>
-          <th class="tg-center">&nbsp;&nbsp;ChatQA-1.5-70B&nbsp;&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="tg-left">&nbsp;&nbsp;Average&nbsp;&nbsp;</td>
-          <td class="tg-center">68.11</td>
-          <td class="tg-center">76.42</td>
-          <td class="tg-center">80.73</td>
-          <td class="tg-center">80.47</td>
-          <td class="tg-center">77.25</td>
-          <td class="tg-center">75.57</td>
-          <td class="tg-center">71.86</td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-
-    We use QuAC and DoQA datasets which have such unanswerable cases to evaluate such capability. We use both answerable and unanswerable samples for this evaluation. Specifically, for unanswerable case, we consider the model indicating that the question cannot be answered as correct, and as for answerable cases, we consider the model not indicating the question is unanswerable as correct (i.e., the model giving an answer). In the end, we calculate the average accuracy score of unanswerable and answerable cases as the final metric.
-
-  <h3>Other Evaluations</h3>
-    <!-- <h4 class="colored_subtitle">KILT</h4>
-    <table class="tg">
-      <thead>
-        <tr>
-          <th class="tg-center"></th>
-          <th class="tg-center">&nbsp;&nbsp;&nbsp;GPT-3.5-Turbo&nbsp;&nbsp;&nbsp;</th>
-          <th class="tg-center">&nbsp;&nbsp;&nbsp;Llama3-instruct-70b&nbsp;&nbsp;&nbsp;</th>
-          <th class="tg-center">&nbsp;&nbsp;&nbsp;Command-R&nbsp;&nbsp;&nbsp;</th>
-          <th class="tg-center">&nbsp;&nbsp;&nbsp;ChatQA-1.5-70B&nbsp;&nbsp;&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="tg-center">&nbsp;&nbsp;Average&nbsp;&nbsp;</td>
-          <td class="tg-center">63.70</td>
-          <td class="tg-center">67.57</td>
-          <td class="tg-center">71.50</td>
-          <td class="tg-center">70.07</td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-    The socres are average accuracy over Natural Questions, TriviaQA, and HotpotQA in <a href="https://arxiv.org/abs/2009.02252" class="custom-link">KILT</a> benchmark. We use the same accuracy evaluation metric as in <a href="https://cohere.com/blog/command-r" class="custom-link">Command-R</a>, where the accuracy is calculated using the presence of keyphrases in the model's answer. We use <a href="https://arxiv.org/abs/2302.07452" class="custom-link">Dragon retriever</a> to retrieve relevant contexts.
-     -->
-     <h4 class="colored_subtitle">Evaluation on Single-Turn QA and RAG Benchmark</h4>
-     <table class="tt">
-      <caption>Zero-shot exact match scores on Natural Questions (NQ), TriviaQA, and HotpotQA.</caption>
-      <thead>
-        <tr>
-          <th class="tt-left">Models</th>
-          <th class="tt-center">&nbsp;&nbsp;&nbsp;Average&nbsp;&nbsp;&nbsp;</th>
-          <th class="tt-center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NQ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-          <th class="tt-center">&nbsp;&nbsp;&nbsp;TriviaQA&nbsp;&nbsp;&nbsp;</th>
-          <th class="tt-center">&nbsp;&nbsp;&nbsp;HotpotQA&nbsp;&nbsp;&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="tt-left">Atlas (11B) <a href="https://www.jmlr.org/papers/volume24/23-0037/23-0037.pdf" class="custom-link">(Izacard et al., 2023)</a></td>
-          <td class="tt-center">39.4</td>
-          <td class="tt-center">26.7</td>
-          <td class="tt-center">56.9</td>
-          <td class="tt-center">34.7</td>
-        </tr>
-        <tr>
-          <td class="tt-left">Raven (11B) <a href="https://arxiv.org/abs/2308.07922" class="custom-link">(Huang et al., 2023)</a></td>
-          <td class="tt-center">-</td>
-          <td class="tt-center">29.6</td>
-          <td class="tt-center">65.7</td>
-          <td class="tt-center">-</td>
-        </tr>
-        <tr>
-          <td class="tt-left">RECOMP (20B) <a href="https://arxiv.org/abs/2310.04408" class="custom-link">(Xu et al., 2024)</a></td>
-          <td class="tt-center">42.1</td>
-          <td class="tt-center">37.0</td>
-          <td class="tt-center">59.0</td>
-          <td class="tt-center">30.4</td>
-        </tr>
-        <tr>
-          <td class="tt-left">InstructRetro (43B) <a href="https://arxiv.org/abs/2310.07713" class="custom-link">(Wang et al., 2024)</a></td>
-          <td class="tt-center">-</td>
-          <td class="tt-center">38.9</td>
-          <td class="tt-center">65.6</td>
-          <td class="tt-center">-</td>
-        </tr>
-        <tr>
-          <td class="tt-left">RePlug (65B) <a href="https://arxiv.org/abs/2301.12652" class="custom-link">(Shi et al., 2023)</a></td>
-          <td class="tt-center">44.5</td>
-          <td class="tt-center">28.8</td>
-          <td class="tt-center">72.6</td>
-          <td class="tt-center">32.0</td>
-        </tr>
-        <tr>
-          <td class="tt-left">RA-DIT (65B) <a href="https://arxiv.org/abs/2310.01352" class="custom-link">(Lin et al., 2024)</a></td>
-          <td class="tt-center">50.1</td>
-          <td class="tt-center">35.2</td>
-          <td class="tt-center">75.4</td>
-          <td class="tt-center">39.7</td>
-        </tr>
-        <tr>
-          <td class="tt-left">Llama3-instruct-8B <a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct" class="custom-link">(Meta, 2024)</a></td>
-          <td class="tt-center">42.5</td>
-          <td class="tt-center">30.9</td>
-          <td class="tt-center">70.7</td>
-          <td class="tt-center">26.0</td>
-        </tr>
-        <tr>
-          <td class="tt-left">Llama3-instruct-70B <a href="https://huggingface.co/meta-llama/Meta-Llama-3-70B-Instruct" class="custom-link">(Meta, 2024)</a></td>
-          <td class="tt-center">53.6</td>
-          <td class="tt-center">42.7</td>
-          <td class="tt-center">82.4</td>
-          <td class="tt-center">35.6</td>
-        </tr>
-        <tr>
-          <td class="tt-left_boardertop">Llama3-ChatQA-1.5-8B</td>
-          <td class="tt-center_boardertop">52.3</td>
-          <td class="tt-center_boardertop">42.4</td>
-          <td class="tt-center_boardertop">81.0</td>
-          <td class="tt-center_boardertop">33.5</td>
-        </tr>
-        <tr>
-          <td class="tt-left">Llama3-ChatQA-1.5-70B</td>
-          <td class="tt-center">58.7</td>
-          <td class="tt-center">47.0</td>
-          <td class="tt-center">85.6</td>
-          <td class="tt-center">42.2</td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-    We further evaluate Llama3-ChatQA-1.5 models on knowledge-intensive single-turn QA datasets: Natural Questions (NQ), TriviaQA, and HotpotQA from the <a href="https://arxiv.org/abs/2009.02252" class="custom-link">KILT Benchmark</a>, and compare them against frontier RAG models. We use the <a href="https://arxiv.org/abs/2302.07452" class="custom-link">Dragon retriever</a> to obtain the most relevant contexts and perform a one-time retrieval for all datasets. We find that, despite its significantly smaller model size, Llama3-ChatQA-1.5-8B performs better than RA-DIT (65B). Llama3-ChatQA-1.5-70B remarkably outperforms existing frontier RAG models.
-
-    <h4 class="colored_subtitle">Human Evaluations</h4>
+    <h3>Needle In A Haystack</h3>
+    <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
     <figure>
-      <img class="img-humaneval" src="figs/human_eval.png">
+     <img class="img-full" src="figs/llama3_long_128k_370.png">
+    </figure>
+   <br>
+
+   We use the needle test: "The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day". We
+find this is generally a harder pressure test than the "passkey" in a haystack test, which is commonly
+used by other long-context LLM works. It demonstrates the performance of our models up
+to 128K tokens. It shows that our model achieves 100% accuracy under both test cases. This test
+confirms our model’s perfect long-context retrieval capability.
+
+    <h3>Tasks beyond 100k</h3>
+    <figure>
+      <img class="img-chatrag" src="figs/100k_eval.png">
+    </figure>
+    We evaluate four realworld dowstream tasks from InfiniteBench. Our model (41.04) outperforms many existing state-of-the-art models, such as GPT4-Turbo-2024-04-09 (33.16), GPT4-1106 preview (28.23),
+    Llama3.1-70B-Instruct (39.81), Qwen2-72B-Instruct (39.77), Llama-3-70B-Instruct-Gradient-262k
+    (32.57) and Claude 2 (33.96), confirming the state-of-the-art long-context capability of our model.
+    <br>
+
+  <h3>Tasks within 32k</h3>
+     <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
+     <figure>
+      <img class="img-chatrag" src="figs/32k_eval.png">
+     </figure>
+    <br>
+  
+  GPT-4-Turbo-2024-04-09 achieves the highest score of 51.93 among all models. Our
+  model scores 47.37, which is higher than Llama-3-70B-Instruct-Gradient-262k but is lower than
+  Qwen2-72B-Instruct. This difference can be attributed to the extensive 32K pretraining implemented
+  by Qwen2-72B-Instruct, while we used a much smaller continued pretraining corpus. Additionally,
+  we found that all the RAG solutions perform worse than the long context solution, which suggest all
+  these SOTA long context LLMs can really handle 32K tokens within their context window.
+
+  <h3>Tasks winthin 4k</h3>
+    We reuse <a href="https://huggingface.co/datasets/nvidia/ChatRAG-Bench" class="custom-link">ChatRAG Bench</a>: a benchmark for evaluating a model's conversational QA capability over documents or retrieved context within 4k context window.
+    ChatRAG Bench consisting of 10 datasets, which covers a wide range of documents and question types, which require models to generate responses from long context, comprehend and reason over tables, conduct arithmetic calculations, and indicate when questions cannot be found within the context. We report the score without HybriDialogue.
+
+    <figure>
+      <img class="img-full" src="figs/4k_eval.png">
     </figure>
     
-    In this human evaluation, we randomly select 60 samples from each of 10 datasets on ChatRAG Bench, and each sample is labelled by three annotators, which results in a total of 1800 annotations. We ask annotators to verify the facts in models' outputs and determine which model provides a more accurate response to the question. From the results, ChatQA-1.0-70B and GPT-4 are tie most of the time, and GPT-4 achieves slightly higher win rate.
+    <br>
 
-  <h3>Training Datasets</h3>
-    We release the <a href="https://huggingface.co/datasets/nvidia/ChatQA-Training-Data" class="custom-link">training datasets</a> described in <a href="https://arxiv.org/abs/2401.10225" class="custom-link">ChatQA paper</a>.
+    <h3>RAG vs Long Context</h3>
+    <figure>
+      <img class="img-chatrag" src="figs/RAG_more_samples.png">
+    </figure>
 
-  <h3>Conversational QA Retriever</h3>
-    We release the <a href="https://huggingface.co/nvidia/dragon-multiturn-query-encoder" class="custom-link">dragon multi-turn query retriever</a> for the conversational QA task. The details of this retriever are described in <a href="https://arxiv.org/abs/2401.10225" class="custom-link">ChatQA paper</a>.
+    <figure>
+      <img class="img-chatrag" src="figs/RAG_vs_long_context_100k_plus.png">
+    </figure>
+
+    For downstream tasks, within 32k sequence length, adding more chunks will improve the accuracy and our long context solution is better than RAG. This means using RAG can
+    save the cost but the accuracy will drop a bit. On the other hand, we found that for context lengths
+    beyond 100K, RAG (using top-5 for our Llama3-ChatQA-2-70B, and top-20 for Qwen2-72B-Instruct)
+    outperforms the full long-context solution. This indicates that even state-of-the-art long-context
+    LLMs may struggle to effectively understand and reason over 128K tokens. In such scenarios,
+    RAG is recommended for better accuracy and lower inference cost, provided it is applicable to the
+    downstream tasks.
+    
+    <br>
 
   <!-- <h3>License</h3>
     The use of the ChatQA-1.5-8B and ChatQA-1.5-70B are governed by the <a href="https://llama.meta.com/llama3/license/" class="custom-link">META LLAMA 3 COMMUNITY LICENSE AGREEMENT</a>. -->
