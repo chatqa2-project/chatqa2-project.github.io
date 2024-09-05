@@ -77,10 +77,20 @@
   <div class="container">
     <br>
     <h2>Introducing ChatQA-2: Bridging the Gap to Proprietary LLMs in Long Context and RAG Capabilities</h2>
-    <h4> <a href="https://huggingface.co/nvidia/" class="custom-link">Model Weights🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Evaluation Data🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Training Data🤗</a> &ensp; <a href="https://huggingface.co/nvidia/dragon-multiturn-query-encoder" class="custom-link">Retriever🤗</a> &ensp; <a href="https://arxiv.org/pdf/2401.10225" class="custom-link">Paper</a>  </h4>
+    <h4> <a href="https://huggingface.co/nvidia/" class="custom-link">Model Weights🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Evaluation Data🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Training Data🤗</a> &ensp; <a href="https://huggingface.co/intfloat/e5-mistral-7b-instruct" class="custom-link">Retriever🤗</a> &ensp; <a href="https://arxiv.org/abs/2407.14482" class="custom-link">Paper</a>  </h4>
     <p>
-    Today (August ?th, 2024), we release ChatQA-2, which achieves better accuracy than GPT-4-Turbo-2024-04-09 on many long-context understanding tasks and surpasses it on the RAG benchmark <a href="https://arxiv.org/abs/2407.14482" class="custom-link">ChatQA-2 paper</a>, and it is built on the top of the <a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B" class="custom-link">Llama-3 base model</a>. Specifically, we incorporate more long context pretraining data as well as long SFT data. We share the model weights, evaluation data, training data, and SFT recipe for future study.
+    Today (September ?th, 2024), we release ChatQA-2, which achieves better accuracy than GPT-4-Turbo-2024-04-09 on many long-context understanding tasks and surpasses it on the RAG benchmark <a href="https://arxiv.org/abs/2407.14482" class="custom-link">ChatQA-2 paper</a>, and it is built on the top of the <a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B" class="custom-link">Llama-3 base model</a>. Specifically, we incorporate more long context pretraining data as well as long SFT data. We share the model weights, evaluation data, training data, and SFT recipe for future study.
     </p>
+
+    <h3>Overview</h3>
+    <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
+    <figure>
+     <img class="img-full" src="figs/overview.png">
+    </figure>
+    Our model achieves the best average score on 4 real-world ultra-long context (beyond
+    100K) tasks from InfiniteBench, and 9 short context (within 4K) tasks from ChatRAG-Bench, outperforming most existing state-of-the-art models, including GPT-4-Turbo-2024-04-09, Qwen2-72B-Instruct, and Llama3.1-70B-Instruct.
+    It shows the strong long context capability of our model/recipe across different sequence length.
+   <br>
     
     <h3>Needle In A Haystack</h3>
     <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
@@ -112,9 +122,9 @@ confirms our model’s perfect long-context retrieval capability.
     <br>
   
   GPT-4-Turbo-2024-04-09 achieves the highest score of 51.93 among all models. Our
-  model scores 47.37, which is higher than Llama-3-70B-Instruct-Gradient-262k but is lower than
-  Qwen2-72B-Instruct. This difference can be attributed to the extensive 32K pretraining implemented
-  by Qwen2-72B-Instruct, while we used a much smaller continued pretraining corpus. Additionally,
+  model scores 48.15, which is higher than Llama-3-70B-Instruct-Gradient-262k but is lower than
+  Qwen2-72B-Instruct and Llama3.1-70B-Instruct. This difference can be attributed to the extensive 32K pretraining implemented
+  by Qwen2-72B-Instruct and Llama3.1-70B-Instruct, while we used a much smaller continued pretraining corpus. Additionally,
   we found that all the RAG solutions perform worse than the long context solution, which suggest all
   these SOTA long context LLMs can really handle 32K tokens within their context window.
 
@@ -125,25 +135,32 @@ confirms our model’s perfect long-context retrieval capability.
     <figure>
       <img class="img-full" src="figs/4k_eval.png">
     </figure>
-    
+    Our model achieves an average score of 56.30, outperforming most existing SOTA models with 128K context window, including
+GPT-4-Turbo-2024-04-09, Qwen2-72B-Instruct, and Llama3.1-70B-Instruct. It is also comparable,
+though slightly behind, Llama3-ChatQA-1.5-70B (57.14), which only supports 4K context length.
+This suggests that extending short-context models to long-context has trade-offs. 
     <br>
 
     <h3>RAG vs Long Context</h3>
     <figure>
       <img class="img-chatrag" src="figs/RAG_more_samples.png">
     </figure>
+    For downstream tasks within 32k sequence length, we found that more tokens
+    consistently yield better results, confirming the strong long-context capability of our model. Also,
+    RAG can still outperform the long-context solution if a sufficient number of top-k chunks are used, i.e., at least 12,000 tokens as shown in Figure
+    2. Therefore, the hyperparameter k can be selected based on the tradeoff between efficiency and
+    accuracy in real-world applications.
+    <br>
 
     <figure>
       <img class="img-chatrag" src="figs/RAG_vs_long_context_100k_plus.png">
     </figure>
 
-    For downstream tasks, within 32k sequence length, adding more chunks will improve the accuracy and our long context solution is better than RAG. This means using RAG can
-    save the cost but the accuracy will drop a bit. On the other hand, we found that for context lengths
-    beyond 100K, RAG (using top-5 for our Llama3-ChatQA-2-70B, and top-20 for Qwen2-72B-Instruct)
-    outperforms the full long-context solution. This indicates that even state-of-the-art long-context
-    LLMs may struggle to effectively understand and reason over 128K tokens. In such scenarios,
-    RAG is recommended for better accuracy and lower inference cost, provided it is applicable to the
-    downstream tasks.
+    On the other hand, we found that for context lengths beyond 100K, RAG (using top-30 chunks for
+    our Llama3-ChatQA-2-70B, and top-20 for Qwen2-72B-Instruct) outperforms the full long-context
+    solution. This indicates that even SOTA long-context LLMs may struggle to effectively understand
+    and reason over 100K tokens. In such scenarios, RAG is recommended for better accuracy and much
+    lower inference cost, provided it is applicable to the downstream tasks.
     
     <br>
 
