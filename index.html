@@ -87,76 +87,67 @@
     <figure>
      <img class="img-full" src="figs/overview.png">
     </figure>
-    We compare our ChatQA-2 long context model with the state-of-the-art long context LLMs across tasks with varying context lengths. Note taht, we open-source the training data and reproduction recipe for building long-context LLMs from short-context base LLMs}, resources that are not currently available for open-access long context models like Qwen2 and Llama3.1. Our model achieves the best average score on 4 real-world ultra-long context (beyond 100K) tasks from InfiniteBench, and 9 short context (within 4K) tasks from \textsc{ChatRAG Bench}.   
+    We compare our ChatQA-2 long context model with the state-of-the-art long context LLMs across tasks with varying context lengths. Note that, we open-source the training data and reproduction recipe for building long-context LLMs from short-context base LLMs, resources that are not currently available for open-access long context models like Qwen2 and Llama3.1. Our model achieves the best average score on 4 real-world ultra-long context (beyond 100K) tasks from InfiniteBench, and 9 short context (within 4K) tasks from ChatRAG Bench.   
     <br>
     
     <h3>Needle In A Haystack</h3>
     <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
     <figure>
-     <img class="img-full" src="figs/llama3_long_128k_370.png">
+     <img class="img-full" src="figs/llama3_1_instruct_70b_tp8_mcore.png">
+     <img class="img-full" src="figs/chatqa2_70b_paul.png">
     </figure>
    <br>
+   We evaluate our model and Llama3.1-70B-Instruct on the Needle In A
+   Haystack (NIAH) test which is popular for testing the long-context
+   capability of LLMs, and can be considered as a threshold level evaluation. We use the needle test:
+   “The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day.” We
+   find this is generally a harder pressure test than the “passkey” in a haystack test, which is also commonly
+   used by other long-context LLM works. The figure above shows that our model can pass the NIAH test with 100% accuracy where Llama3.1-Instruct-70B fails at sequence length around 128k.  
 
-   We use the needle test: "The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day". We
-find this is generally a harder pressure test than the "passkey" in a haystack test, which is commonly
-used by other long-context LLM works. It shows that our model achieves 100% accuracy confirming our model’s perfect long-context retrieval capability.
+<h3>RAG vs Long Context</h3>
+<figure>
+  <img class="img-chatrag" src="figs/RAG_more_samples.png">
+</figure>
+This figure shows the ablation of our model with RAG given different top-<i>k</i> = {5, 10, 20, 40} retrieval, and  chunk-size = {300, 600, 1200} on long context benchmarks within 32K tokens.
+The accuracy can be monotonically improved with more retrieved tokens (i.e., <i>k</i> &times; chunk_size) in the context window.
+Interestingly, RAG can still outperform the long-context solution if a sufficient number of top-<i>k</i> chunks are used, i.e., at least 12,000 tokens. Therefore, the hyperparameter <i>k</i> can be selected based on the tradeoff between efficiency and
+accuracy in real-world applications.
+<br>
 
-    <h3>Tasks beyond 100k</h3>
-    <figure>
-      <img class="img-chatrag" src="figs/100k_eval.png">
-    </figure>
-    We evaluate four realworld dowstream tasks from InfiniteBench. Our model (41.04) outperforms many existing state-of-the-art models, such as GPT4-Turbo-2024-04-09 (33.16), GPT4-1106 preview (28.23),
-    Llama3.1-70B-Instruct (39.81), Qwen2-72B-Instruct (39.77), Llama-3-70B-Instruct-Gradient-262k
-    (32.57) and Claude 2 (33.96), showing a state-of-the-art long-context capability of our model.
-    <br>
+<h3>Tasks beyond 100k</h3>
+<figure>
+  <img class="img-chatrag" src="figs/100k_eval.png">
+</figure>
+We evaluate four realworld dowstream tasks from InfiniteBench. Our model (41.04) outperforms many existing state-of-the-art models, such as GPT4-Turbo-2024-04-09 (33.16), GPT4-1106 preview (28.23),
+Llama3.1-70B-Instruct (39.81), Qwen2-72B-Instruct (39.77), Llama-3-70B-Instruct-Gradient-262k
+(32.57) and Claude 2 (33.96), showing a state-of-the-art long-context capability of our model.
+<br>
 
-  <h3>Tasks within 32k</h3>
-     <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
-     <figure>
-      <img class="img-chatrag" src="figs/32k_eval.png">
-     </figure>
-    <br>
-  
-  GPT-4-Turbo-2024-04-09 achieves the highest score of 51.93 among all models. Our
-  model scores 48.15, which is higher than Llama-3-70B-Instruct-Gradient-262k but is slightly lower than
-  Qwen2-72B-Instruct and Llama3.1-70B-Instruct. Additionally,
-  we found that all the RAG solutions perform worse than the long context solution, which suggest all
-  these SOTA long context LLMs can really handle 32K tokens within their context window.
+<h3>Tasks within 32k</h3>
+  <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
+  <figure>
+  <img class="img-chatrag" src="figs/32k_eval.png">
+  </figure>
+<br>
 
-  <h3>Tasks winthin 4k</h3>
-    We reuse <a href="https://huggingface.co/datasets/nvidia/ChatRAG-Bench" class="custom-link">ChatRAG Bench</a>: a benchmark for evaluating a model's conversational QA capability over documents or retrieved context within 4k context window.
-    ChatRAG Bench consisting of 10 datasets, which covers a wide range of documents and question types, which require models to generate responses from long context, comprehend and reason over tables, conduct arithmetic calculations, and indicate when questions cannot be found within the context. We report the score without HybriDialogue.
+GPT-4-Turbo-2024-04-09 achieves the highest score of 51.93 among all models. Our
+model scores 48.15, which is higher than Llama-3-70B-Instruct-Gradient-262k but is slightly lower than
+Qwen2-72B-Instruct and Llama3.1-70B-Instruct. Additionally,
+we found that long context solution is better than a RAG solution using top-<i>5</i> with the chunk size as 1200, which suggest all
+these SOTA long context LLMs can really handle 32K tokens within their context window.
 
-    <figure>
-      <img class="img-full" src="figs/4k_eval.png">
-    </figure>
-    Our model achieves an average score of 56.30, outperforming most existing SOTA models with 128K context window, including
-GPT-4-Turbo-2024-04-09, Qwen2-72B-Instruct, and Llama3.1-70B-Instruct. It is also comparable,
-though slightly behind, the Llama3-ChatQA-1.5-70B (57.14) with only 4K context length.
-This suggests that extending short-context models to long-context is not a free lunch.
-    <br>
+<h3>Tasks winthin 4k</h3>
+We reuse <a href="https://huggingface.co/datasets/nvidia/ChatRAG-Bench" class="custom-link">ChatRAG Bench</a>: a benchmark for evaluating a model's conversational QA capability over documents or retrieved context within 4k context window.
+ChatRAG Bench consisting of 10 datasets, which covers a wide range of documents and question types, which require models to generate responses from long context, comprehend and reason over tables, conduct arithmetic calculations, and indicate when questions cannot be found within the context. We report the score without HybriDialogue.
 
-    <h3>RAG vs Long Context</h3>
-    <figure>
-      <img class="img-chatrag" src="figs/RAG_more_samples.png">
-    </figure>
-    For downstream tasks within 32k sequence length, we found that more tokens
-    consistently yield better results. Also,
-    RAG can still outperform the long-context solution if a sufficient number of top-k chunks are used, i.e., at least 12,000 tokens as shown in Figure
-    2. Therefore, the hyperparameter k can be selected based on the tradeoff between efficiency and
-    accuracy in real-world applications.
-    <br>
-
-    <figure>
-      <img class="img-chatrag" src="figs/RAG_vs_long_context_100k_plus.png">
-    </figure>
-
-    On the other hand, for context lengths beyond 100K, RAG (using top-30 chunks for
-    our Llama3-ChatQA-2-70B, and top-20 for Qwen2-72B-Instruct) outperforms the full long-context
-    solution. In such scenarios, RAG is recommended for better accuracy and much
-    lower inference cost, provided it is applicable to the downstream tasks.
-    
-    <br>
+<figure>
+  <img class="img-full" src="figs/4k_eval.png">
+</figure>
+Our model achieves an average score of 56.30, outperforming most existing SOTA models with 128K context window, including
+GPT-4-Turbo-2024-04-09 (54.72), Qwen2-72B-Instruct (54.06), and Llama3.1-70B-Instruct (52.12). It is also comparable,
+though slightly behind, the Llama3-ChatQA-1.5-70B (57.14) which is our best model with 4K context length.
+This suggests that our long context extension maintains the short context capability abd extending short-context models to long-context is not a free lunch.
+<br>
 
   <!-- <h3>License</h3>
     The use of the ChatQA-1.5-8B and ChatQA-1.5-70B are governed by the <a href="https://llama.meta.com/llama3/license/" class="custom-link">META LLAMA 3 COMMUNITY LICENSE AGREEMENT</a>. -->
