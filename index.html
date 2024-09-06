@@ -47,15 +47,35 @@
       .img-chatrag {
         max-width: 92%; /* Set the maximum width of the image to 100% */
         height: auto; /* Ensure the aspect ratio of the image is maintained */
+
+      }
+
+      .img-70 {
+        max-width: 70%; /* Set the maximum width of the image to 100% */
+        height: auto; /* Ensure the aspect ratio of the image is maintained */
+
+      }
+
+      .img-75 {
+        max-width: 75%; /* Set the maximum width of the image to 100% */
+        height: auto; /* Ensure the aspect ratio of the image is maintained */
+
+      }
+
+      .img-fit {
+        max-width: 80%; /* Set the maximum width of the image to 80% */
+        height: auto; /* Ensure the aspect ratio of the image is maintained */
+
       }
 
       .img-full {
         max-width: 100%; /* Set the maximum width of the image to 100% */
         height: auto; /* Ensure the aspect ratio of the image is maintained */
+
       }
 
-      .img-humaneval {
-        max-width: 55%; /* Set the maximum width of the image to 100% */
+      .img-60 {
+        max-width: 60%; /* Set the maximum width of the image to 100% */
         height: auto; /* Ensure the aspect ratio of the image is maintained */
       }
 
@@ -65,6 +85,11 @@
         border-radius: 5px;
         font-size: 15px;
         overflow-x: auto;
+      }
+      .flex-content{
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       code {
         display: block;
@@ -85,7 +110,9 @@
     <h3>Overview</h3>
     <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
     <figure>
-     <img class="img-full" src="figs/overview.png">
+      <div class="flex-content" style="text-align: center;">
+        <img class="img-fit" src="figs/overview.png">
+     </div>
     </figure>
     We compare our ChatQA-2 long context model with the state-of-the-art long context LLMs across tasks with varying context lengths. Note that, we open-source the training data and reproduction recipe for building long-context LLMs from short-context base LLMs, resources that are not currently available for open-access long context models like Qwen2 and Llama3.1. Our model achieves the best average score on 4 real-world ultra-long context (beyond 100K) tasks from InfiniteBench, and 9 short context (within 4K) tasks from ChatRAG Bench.   
     <br>
@@ -93,20 +120,25 @@
     <h3>Needle In A Haystack</h3>
     <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
     <figure>
-     <img class="img-full" src="figs/llama3_1_instruct_70b_tp8_mcore.png">
-     <img class="img-full" src="figs/chatqa2_70b_paul.png">
+    <div class="flex-content" style="text-align: center;">
+     <img class="img-70" src="figs/llama3_1_instruct_70b_tp8_mcore.png">
+     </div>
+     <div class="flex-content" style="text-align: center;">
+     <img class="img-70" src="figs/chatqa2_70b_paul.png">
+     </div>
     </figure>
-   <br>
    We evaluate our model and Llama3.1-70B-Instruct on the Needle In A
    Haystack (NIAH) test which is popular for testing the long-context
    capability of LLMs, and can be considered as a threshold level evaluation. We use the needle test:
    “The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day.” We
    find this is generally a harder pressure test than the “passkey” in a haystack test, which is also commonly
    used by other long-context LLM works. The figure above shows that our model can pass the NIAH test with 100% accuracy where Llama3.1-Instruct-70B fails at sequence length around 128k.  
+   <br>
 
 <h3>RAG vs Long Context</h3>
 <figure>
-  <img class="img-chatrag" src="figs/RAG_more_samples.png">
+  <div class="flex-content" style="text-align: center;">
+  <img class="img-60" src="figs/RAG_more_samples.png"></div>
 </figure>
 This figure shows the ablation of our model with RAG given different top-<i>k</i> = {5, 10, 20, 40} retrieval, and  chunk-size = {300, 600, 1200} on long context benchmarks within 32K tokens.
 The accuracy can be monotonically improved with more retrieved tokens (i.e., <i>k</i> &times; chunk_size) in the context window.
@@ -116,7 +148,9 @@ accuracy in real-world applications.
 
 <h3>Tasks beyond 100k</h3>
 <figure>
-  <img class="img-chatrag" src="figs/100k_eval.png">
+  <div class="flex-content" style="text-align: center;">
+  <img class="img-70" src="figs/100k_eval.png">
+</div>
 </figure>
 We evaluate four realworld dowstream tasks from InfiniteBench. Our model (41.04) outperforms many existing state-of-the-art models, such as GPT4-Turbo-2024-04-09 (33.16), GPT4-1106 preview (28.23),
 Llama3.1-70B-Instruct (39.81), Qwen2-72B-Instruct (39.77), Llama-3-70B-Instruct-Gradient-262k
@@ -126,22 +160,24 @@ Llama3.1-70B-Instruct (39.81), Qwen2-72B-Instruct (39.77), Llama-3-70B-Instruct-
 <h3>Tasks within 32k</h3>
   <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
   <figure>
-  <img class="img-chatrag" src="figs/32k_eval.png">
+    <div class="flex-content" style="text-align: center;">
+  <img class="img-75" src="figs/32k_eval.png">
+</div>
   </figure>
-<br>
-
 GPT-4-Turbo-2024-04-09 achieves the highest score of 51.93 among all models. Our
 model scores 48.15, which is higher than Llama-3-70B-Instruct-Gradient-262k but is slightly lower than
 Qwen2-72B-Instruct and Llama3.1-70B-Instruct. Additionally,
 we found that long context solution is better than a RAG solution using top-<i>5</i> with the chunk size as 1200, which suggest all
 these SOTA long context LLMs can really handle 32K tokens within their context window.
+<br>
 
 <h3>Tasks winthin 4k</h3>
 We reuse <a href="https://huggingface.co/datasets/nvidia/ChatRAG-Bench" class="custom-link">ChatRAG Bench</a>: a benchmark for evaluating a model's conversational QA capability over documents or retrieved context within 4k context window.
 ChatRAG Bench consisting of 10 datasets, which covers a wide range of documents and question types, which require models to generate responses from long context, comprehend and reason over tables, conduct arithmetic calculations, and indicate when questions cannot be found within the context. We report the score without HybriDialogue.
 
 <figure>
-  <img class="img-full" src="figs/4k_eval.png">
+  <div class="flex-content" style="text-align: center;">
+  <img class="img-full" src="figs/4k_eval.png"></div>
 </figure>
 Our model achieves an average score of 56.30, outperforming most existing SOTA models with 128K context window, including
 GPT-4-Turbo-2024-04-09 (54.72), Qwen2-72B-Instruct (54.06), and Llama3.1-70B-Instruct (52.12). It is also comparable,
