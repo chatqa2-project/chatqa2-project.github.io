@@ -79,7 +79,7 @@
     <h2>Introducing ChatQA-2: Bridging the Gap to Proprietary LLMs in Long Context and RAG Capabilities</h2>
     <h4> <a href="https://huggingface.co/nvidia/" class="custom-link">Model Weights🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Evaluation Data🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Training Data🤗</a> &ensp; <a href="https://huggingface.co/intfloat/e5-mistral-7b-instruct" class="custom-link">Retriever🤗</a> &ensp; <a href="https://arxiv.org/abs/2407.14482" class="custom-link">Paper</a>  </h4>
     <p>
-    Today (September ?th, 2024), we release ChatQA-2, which achieves better accuracy than GPT-4-Turbo-2024-04-09 on many long-context understanding tasks and surpasses it on the RAG benchmark <a href="https://arxiv.org/abs/2407.14482" class="custom-link">ChatQA-2 paper</a>, and it is built on the top of the <a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B" class="custom-link">Llama-3 base model</a>. Specifically, we incorporate more long context pretraining data as well as long SFT data. We share the model weights, evaluation data, training data, and SFT recipe for future study.
+    Today (September 9th, 2024), we release ChatQA-2, which achieves better accuracy than GPT-4-Turbo-2024-04-09 on many long-context understanding tasks and surpasses it on the RAG benchmark <a href="https://arxiv.org/abs/2407.14482" class="custom-link">ChatQA-2 paper</a>, and it is built on the top of the <a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B" class="custom-link">Llama-3 base model</a>. Specifically, we incorporate more long context pretraining data as well as long SFT data. We open-source the model weights, training data, evaluation data, and SFT recipe for future study.
     </p>
 
     <h3>Overview</h3>
@@ -87,10 +87,8 @@
     <figure>
      <img class="img-full" src="figs/overview.png">
     </figure>
-    Our model achieves the best average score on 4 real-world ultra-long context (beyond
-    100K) tasks from InfiniteBench, and 9 short context (within 4K) tasks from ChatRAG-Bench, outperforming most existing state-of-the-art models, including GPT-4-Turbo-2024-04-09, Qwen2-72B-Instruct, and Llama3.1-70B-Instruct.
-    It shows the strong long context capability of our model/recipe across different sequence length.
-   <br>
+    We compare our ChatQA-2 long context model with the state-of-the-art long context LLMs across tasks with varying context lengths. Note taht, we open-source the training data and reproduction recipe for building long-context LLMs from short-context base LLMs}, resources that are not currently available for open-access long context models like Qwen2 and Llama3.1. Our model achieves the best average score on 4 real-world ultra-long context (beyond 100K) tasks from InfiniteBench, and 9 short context (within 4K) tasks from \textsc{ChatRAG Bench}.   
+    <br>
     
     <h3>Needle In A Haystack</h3>
     <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
