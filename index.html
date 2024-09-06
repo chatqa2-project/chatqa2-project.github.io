@@ -110,7 +110,7 @@
 </figure>
 This figure shows the ablation of our model with RAG given different top-<i>k</i> = {5, 10, 20, 40} retrieval, and  chunk-size = {300, 600, 1200} on long context benchmarks within 32K tokens.
 The accuracy can be monotonically improved with more retrieved tokens (i.e., <i>k</i> &times; chunk_size) in the context window.
-Interestingly, RAG can still outperform the long-context solution if a sufficient number of top-<i>k</i> chunks are used, i.e., at least 12,000 tokens. Therefore, the hyperparameter <i>k</i> can be selected based on the tradeoff between efficiency and
+Interestingly, RAG can still outperform the long-context solution if a sufficient number of top-<i>k</i> chunks or input tokens are used, i.e., at least 12,000 tokens. Therefore, the hyperparameter <i>k</i> can be selected based on the tradeoff between efficiency and
 accuracy in real-world applications.
 <br>
 
