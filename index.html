@@ -101,7 +101,7 @@
 
   <div class="container">
     <br>
-    <h2>Introducing ChatQA-2: Bridging the Gap to Proprietary LLMs in Long Context and RAG Capabilities</h2>
+    <h2>ChatQA-2: Bridging the Gap to Proprietary LLMs in Long Context and RAG Capabilities</h2>
     <h4> <a href="https://huggingface.co/nvidia/" class="custom-link">Model Weights🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Evaluation Data🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Training Data🤗</a> &ensp; <a href="https://arxiv.org/abs/2407.14482" class="custom-link">Paper</a>  </h4>
     <p>
     Today (September 9th, 2024), we release <a href="https://arxiv.org/abs/2407.14482" class="custom-link">ChatQA-2</a>, which achieves higher accuracy than GPT-4-Turbo-2024-04-09, Llama-3.1-70B-Instruct, and Qwen2-72B-Instruct on 128K long-context understanding tasks and surpasses them on the RAG benchmark. It was built on the top of the <a href="https://huggingface.co/meta-llama/Meta-Llama-3-70B" class="custom-link">Llama-3 base model</a> with 8K context window. We open-source the model weights, training data, evaluation data, and SFT recipe for future study.
@@ -150,6 +150,8 @@ The accuracy can be monotonically improved with more retrieved tokens (i.e., <i>
 Interestingly, RAG can still outperform the long-context solution if a sufficient number of top-<i>k</i> chunks or input tokens are used, i.e., at least 12,000 tokens. Therefore, the hyperparameter <i>k</i> can be selected based on the tradeoff between efficiency and
 accuracy in real-world applications.
 <br>
+
+
 
 <h3>Tasks beyond 100k</h3>
 <figure>
