@@ -102,29 +102,34 @@
   <div class="container">
     <br>
     <h2>Introducing ChatQA-2: Bridging the Gap to Proprietary LLMs in Long Context and RAG Capabilities</h2>
-    <h4> <a href="https://huggingface.co/nvidia/" class="custom-link">Model Weights🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Evaluation Data🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Training Data🤗</a> &ensp; <a href="https://huggingface.co/intfloat/e5-mistral-7b-instruct" class="custom-link">Retriever🤗</a> &ensp; <a href="https://arxiv.org/abs/2407.14482" class="custom-link">Paper</a>  </h4>
+    <h4> <a href="https://huggingface.co/nvidia/" class="custom-link">Model Weights🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Evaluation Data🤗</a> &ensp; <a href="https://huggingface.co/datasets/nvidia/" class="custom-link">Training Data🤗</a> &ensp; <a href="https://arxiv.org/abs/2407.14482" class="custom-link">Paper</a>  </h4>
     <p>
-    Today (September 9th, 2024), we release ChatQA-2, which achieves better accuracy than GPT-4-Turbo-2024-04-09 on many long-context understanding tasks and surpasses it on the RAG benchmark <a href="https://arxiv.org/abs/2407.14482" class="custom-link">ChatQA-2 paper</a>, and it is built on the top of the <a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B" class="custom-link">Llama-3 base model</a>. Specifically, we incorporate more long context pretraining data as well as long SFT data. We open-source the model weights, training data, evaluation data, and SFT recipe for future study.
+    Today (September 9th, 2024), we release <a href="https://arxiv.org/abs/2407.14482" class="custom-link">ChatQA-2</a>, which achieves higher accuracy than GPT-4-Turbo-2024-04-09, Llama-3.1-70B-Instruct, and Qwen2-72B-Instruct on 128K long-context understanding tasks and surpasses them on the RAG benchmark. It was built on the top of the <a href="https://huggingface.co/meta-llama/Meta-Llama-3-70B" class="custom-link">Llama-3 base model</a> with 8K context window. We open-source the model weights, training data, evaluation data, and SFT recipe for future study.
     </p>
 
     <h3>Overview</h3>
     <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
+    The long-context capability of LLMs is sometimes considered a rival technique to retrieval-augmented generation (RAG).
+    In fact, <strong>RAG and long-context techniques complement each other from a pragmatic perspective</strong>.
+    An LLM with a long context window can either process large volumes of text as a prompt or utilize retrieval methods to efficiently extract relevant information from the extensive text, depending on the downstream tasks and accuracy vs. efficiency trade-offs.
+    RAG has efficiency advantages and can easily retrieve relevant contexts for query-based tasks (e.g, QA) from billions of tokens, a feat that long context models cannot achieve so far. Meanwhile, long context models are good at tasks such as summarizing entire documents, where RAG can not perform. 
+    As a result, <strong>the state-of-the-art LLM needs to excel at both capabilities, providing options for different downstream tasks and meeting different accuracy-efficiency trade-off requirements</strong>.
     <figure>
       <div class="flex-content" style="text-align: center;">
         <img class="img-fit" src="figs/overview.png">
      </div>
     </figure>
-    We compare our ChatQA-2 long context model with the state-of-the-art long context LLMs across tasks with varying context lengths. Note that, we open-source the training data and reproduction recipe for building long-context LLMs from short-context base LLMs, resources that are not currently available for open-access long context models like Qwen2 and Llama3.1. Our model achieves the best average score on 4 real-world ultra-long context (beyond 100K) tasks from InfiniteBench, and 9 short context (within 4K) tasks from ChatRAG Bench.   
+    We compare our ChatQA-2 long-context model with state-of-the-art long-context LLMs across tasks of varying context lengths. Notably, we open-source the training data and reproduction recipe for building 128K long-context LLMs from pretrained base models with 8K context, resources that are not currently available for open-access (open-weights) 128K context models like Qwen2 and Llama3.1. Our model achieves the highest average score on four real-world ultra-long context tasks (beyond 100K) from InfiniteBench, as well as nine short-context tasks (within 4K) from ChatRAG Bench.
     <br>
     
     <h3>Needle In A Haystack</h3>
     <!-- <h4 class="colored_subtitle">Evaluation on </h4> -->
     <figure>
     <div class="flex-content" style="text-align: center;">
-     <img class="img-70" src="figs/llama3_1_instruct_70b_tp8_mcore.png">
+     <img class="img-60" src="figs/llama3_1_instruct_70b_tp8_mcore.png">
      </div>
      <div class="flex-content" style="text-align: center;">
-     <img class="img-70" src="figs/chatqa2_70b_paul.png">
+     <img class="img-60" src="figs/chatqa2_70b_paul.png">
      </div>
     </figure>
    We evaluate our model and Llama3.1-70B-Instruct on the Needle In A
@@ -132,7 +137,7 @@
    capability of LLMs, and can be considered as a threshold level evaluation. We use the needle test:
    “The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day.” We
    find this is generally a harder pressure test than the “passkey” in a haystack test, which is also commonly
-   used by other long-context LLM works. The figure above shows that our model can pass the NIAH test with 100% accuracy where Llama3.1-Instruct-70B fails at sequence length around 128k.  
+   used by other long-context LLM works. The figure above shows that our model can pass the NIAH test with 100% accuracy where Llama3.1-Instruct-70B fails at sequence length around 128k, although both of them can pass “passkey” in a haystack test.
    <br>
 
 <h3>RAG vs Long Context</h3>
@@ -182,7 +187,6 @@ ChatRAG Bench consisting of 10 datasets, which covers a wide range of documents 
 Our model achieves an average score of 56.30, outperforming most existing SOTA models with 128K context window, including
 GPT-4-Turbo-2024-04-09 (54.72), Qwen2-72B-Instruct (54.06), and Llama3.1-70B-Instruct (52.12). It is also comparable,
 though slightly behind, the Llama3-ChatQA-1.5-70B (57.14) which is our best model with 4K context length.
-This suggests that our long context extension maintains the short context capability abd extending short-context models to long-context is not a free lunch.
 <br>
 
   <!-- <h3>License</h3>
